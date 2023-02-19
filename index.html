@@ -14,7 +14,7 @@
             <input type="text" class="form-control" id="name">
         </div>
         <div class="form-group">
-            <label for="description">description:</label>
+            <label for="age">Age:</label>
             <input type="number" class="form-control" id="description">
         </div>
         <button type="submit" class="btn btn-primary" onclick="addStudent()">Add Student</button>
@@ -24,7 +24,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>description</th>
+                    <th>Age</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -35,19 +35,19 @@
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
-        const MY_SERVER ='https://web-service-flask-sqlalchemy-cors-render.onrender.com/item'
+        const MY_SERVER ="https://web-service-flask-sqlalchemy-cors-render.onrender.com/item"
         function getStudents() {
             axios.get(MY_SERVER)
             .then(response => {
-                const students = response.data.students;
+                const students = response.data;
                 const studentTable = document.getElementById('student-table');
                 studentTable.innerHTML = '';
 
-                students.forEach(st => {
+                students.forEach(student => {
                     const row = `<tr>
-                        <td>${st.id}</td>
-                        <td>${st.name}</td>
-                        <td>${st.description}</td>
+                        <td>${student.id}</td>
+                        <td>${student.name}</td>
+                        <td>${student.description}</td>
                         <td>
                             <button class="btn btn-primary" onclick="editStudent(${student.id})">Edit</button>
                             <button class="btn btn-danger" onclick="deleteStudent(${student.id})">Delete</button>
@@ -87,11 +87,11 @@
 
         function editStudent(id) {
             const name = prompt('Enter new name');
-            const description = prompt('Enter new description');
+            const age = prompt('Enter new age');
 
             axios.put(`${MY_SERVER}${"/"}${id}`, {
                 name: name,
-                description: description
+                age: age
             })
             .then(response => {
                 console.log(response.data);
