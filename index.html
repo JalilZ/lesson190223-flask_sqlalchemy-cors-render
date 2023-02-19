@@ -5,6 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!--WEB PAGES:-->
+    <!--https://jalilz.github.io/lesson190223-flask_sqlalchemy-cors-render/-->
+    <!--https://inspiring-moonbeam-e17a24.netlify.app-->
 </head>
 <body>
     <div class="container">
@@ -14,7 +17,7 @@
             <input type="text" class="form-control" id="name">
         </div>
         <div class="form-group">
-            <label for="age">Age:</label>
+            <label for="description">Description:</label>
             <input type="number" class="form-control" id="description">
         </div>
         <button type="submit" class="btn btn-primary" onclick="addStudent()">Add Student</button>
@@ -24,7 +27,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Age</th>
+                    <th>Description</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -87,11 +90,11 @@
 
         function editStudent(id) {
             const name = prompt('Enter new name');
-            const age = prompt('Enter new age');
+            const desc = prompt('Enter new Description');
 
             axios.put(`${MY_SERVER}${"/"}${id}`, {
                 name: name,
-                age: age
+                description: desc
             })
             .then(response => {
                 console.log(response.data);
